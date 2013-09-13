@@ -1,5 +1,5 @@
 ====================
-Outage: A Django App Tp Shut Down Your Django App
+Outage: A Django App To Shut Down Your Django App
 ====================
 
 This is a simple app that can be used to bring down a PyPE django project by
