@@ -16,7 +16,6 @@ Quick start
       )
 
 2. Add the outage middleware to your MIDDLEWARE_CLASSES setting like this::
-   #TODO: where should this be in the middleware stack?
 
       MIDDLEWARE_CLASSES= (
           ...
