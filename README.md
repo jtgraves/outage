@@ -36,4 +36,6 @@ Quick start
 
 5. Run `python manage.py syncdb` to create the outage models.
 
-TODO: add notes about db users
+
+NOTE: 
+Since this app creates a new table, if your database design involves multiple users, you will need to go through the same process that you typically use to migrate a table and grant privilidges.
