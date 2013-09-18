@@ -1,6 +1,5 @@
-====================
-Outage: A Django App To Shut Down Your Django App
-====================
+Outage: _A Django App To Shut Down Your Django App_
+=====
 
 This is a simple app that can be used to bring down a PyPE django project by
 simply adding an entry to an oracle table.
