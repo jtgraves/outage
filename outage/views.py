@@ -1,14 +1,17 @@
 from django.conf import settings
-from outage.models import ShutDown, DB_OUTAGE_MSG
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 
-#TODO: look at pkg utilities for other options
-module_path, ctx_class = settings.OUTAGE_CONTEXT.rsplit('.',1)
+from utdirect.templates import UTDirectContext, UTDirectTemplateAPIError
 
-module = __import__(module_path, fromlist=[ctx_class])
+from outage.models import ShutDown
 
-context = getattr(module, ctx_class)
+try:
+    module_path, ctx_class = settings.OUTAGE_CONTEXT.rsplit('.',1)
+    module = __import__(module_path, fromlist=[ctx_class])
+    context = getattr(module, ctx_class)
+except AttributeError:
+    context = UTDirectContext
 
 
 class Outage(TemplateView):
@@ -26,5 +29,14 @@ class Outage(TemplateView):
         objects = ShutDown.objects.all()
         msg = objects[0].message
         ctx.update({'msg':msg, 'title':'Service Outage'})
-        new_context = context(self.request, ctx)
+        try:
+            new_context = context(self.request, ctx)
+        except UTDirectTemplateAPIError:
+            new_context = context(
+                self.request,
+                dict=ctx,
+                api_key='8B54A49X54',
+                page_title='Service Outage',
+                window_title='Service Outage',
+            )
         return new_context
