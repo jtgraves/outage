@@ -40,20 +40,20 @@ Setup
    OUTAGE_CONTEXT = 'path.to.your.desired.context.object'
 ```
 
-3. Add an OUTAGE_DEFAULT_REDIRECT to your settings.py. This should be the name url pattern, and will be used to redirect any users attempting to access the outage urls directly, when there is no outage occuring.::
+4. Add an OUTAGE_DEFAULT_REDIRECT to your settings.py. This should be the name url pattern, and will be used to redirect any users attempting to access the outage urls directly, when there is no outage occuring.::
 
 ```python
    OUTAGE_DEFAULT_REDIRECT = 'url_name' # e.g.: 'home'
 ```
 
-4. Include the outage URLconf in your project urls.py like this::
+5. Include the outage URLconf in your project urls.py like this::
 
 ```python
     url(r'^apps/services/requests/', include(outage.urls)),
 ```
 
-5. Run `python manage.py syncdb` to create the outage models.
+6. Run `python manage.py syncdb` to create the outage models.
 
 
 **NOTE**: 
-_Since this app creates a new table, if your database design involves multiple users, you will need to go through the same process that you typically use to migrate a table and grant priviliges._
+_Since this app creates a new table, if your database design involves multiple users, you will need to go through the same process that you typically use to migrate a table and grant privileges._
