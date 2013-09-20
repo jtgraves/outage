@@ -34,7 +34,7 @@ Setup
       )
 ```
 
-3. Add an OUTAGE_CONTEXT object to your settings.py. This should be a class that carries the core of your page context logic. If not supplied, a default will be used.::
+3. Add an OUTAGE_CONTEXT object to your settings.py. This should be a class that carries the core of your page context logic. If not supplied, the UTDirectContext will be used, but you will need to supply the api key in your settings (eg: API_KEY = 'your_api_key')::
 
 ```python
    OUTAGE_CONTEXT = 'path.to.your.desired.context.object'

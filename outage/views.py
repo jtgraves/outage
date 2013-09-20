@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 
@@ -32,11 +33,20 @@ class Outage(TemplateView):
         try:
             new_context = context(self.request, ctx)
         except UTDirectTemplateAPIError:
-            new_context = context(
-                self.request,
-                dict=ctx,
-                api_key='8B54A49X54',
-                page_title='Service Outage',
-                window_title='Service Outage',
-            )
+            try:
+                new_context = context(
+                    self.request,
+                    dict=ctx,
+                    api_key=settings.API_KEY,
+                    page_title='Service Outage',
+                    window_title='Service Outage',
+                )
+            except AttributeError:
+                raise ImproperlyConfigured(
+                    'If you do not supply your own context object by setting '
+                    'an OUTAGE_CONTEXT in settings.py, then you must supply an '
+                    'API_KEY in your settings, which will be used to call the '
+                    'default UTDirecrContext.'
+                )
+
         return new_context
