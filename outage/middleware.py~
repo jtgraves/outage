@@ -2,6 +2,7 @@ import sys
 
 from cx_Oracle import DatabaseError
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from django.shortcuts import redirect
 
 from utdirect.templates import UTDirectContext
