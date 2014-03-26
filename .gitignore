@@ -34,3 +34,6 @@ nosetests.xml
 .project
 .pydevproject
 *.swp
+
+# Windows Temp Files
+*~
